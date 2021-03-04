@@ -83,10 +83,10 @@ RSpec.describe User, type: :model do
     it "ユーザー本名のフリガナは、全角（カタカナ）での入力が必須であること" do
       user = FactoryBot.build(:user, kana_surname: "ｱｱｱ")
       user.valid?
-      expect(user.errors[:kana_surname]).to include("Kana surname Full-width katakana characters")
+      expect(user.errors[:kana_surname]).to include("Full-width katakana characters")
       user = FactoryBot.build(:user, kana_firstname: "ｲｲｲ")
       user.valid?
-      expect(user.errors[:kana_firstname]).to include("Kana firstname Full-width katakana characters")
+      expect(user.errors[:kana_firstname]).to include("Full-width katakana characters")
     end
     it "生年月日が必須であること" do
       user = FactoryBot.build(:user, birthday: "")
