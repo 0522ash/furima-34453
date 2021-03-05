@@ -1,2 +1,0 @@
-class ConditionId < ApplicationRecord
-end

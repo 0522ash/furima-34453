@@ -1,2 +1,0 @@
-class ShipFromId < ApplicationRecord
-end
