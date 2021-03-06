@@ -76,7 +76,7 @@ RSpec.describe User, type: :model do
     end
 
 
-    describe '新規登録/本人情報確認' do
+    context '新規登録/本人情報確認' do
       it 'ユーザー本名は、名字が必須であること' do
         @user.surname = ''
         @user.valid?
@@ -117,25 +117,25 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Kana firstname Full-width katakana characters")
       end
+    end
 
-      context  'カタカナ以外の全角文字だと登録できないこと' do
-        it 'ユーザー名字のフリガナは、全角（カタカナ）での入力が必須であること' do
-          @user.kana_surname = 'ｱｱｱ'
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Kana surname Full-width katakana characters")
-        end
-        it 'ユーザー名前のフリガナは、全角（カタカナ）での入力が必須であること' do
-          @user.kana_firstname = 'ｲｲｲ'
-          @user.valid?
-          expect(@user.errors.full_messages).to include("Kana firstname Full-width katakana characters")
-        end
-      end
-
-      it '生年月日が必須であること' do
-        @user.birthday = ''
+    context  'カタカナ以外の全角文字だと登録できないこと' do
+      it 'ユーザー名字のフリガナは、全角（カタカナ）での入力が必須であること' do
+        @user.kana_surname = 'ｱｱｱ'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Birthday can't be blank")
+        expect(@user.errors.full_messages).to include("Kana surname Full-width katakana characters")
       end
+      it 'ユーザー名前のフリガナは、全角（カタカナ）での入力が必須であること' do
+        @user.kana_firstname = 'ｲｲｲ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana firstname Full-width katakana characters")
+      end
+    end
+
+    it '生年月日が必須であること' do
+      @user.birthday = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birthday can't be blank")
     end
   end
 end
