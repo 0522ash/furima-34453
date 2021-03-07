@@ -18,7 +18,7 @@ RSpec.describe Item, type: :model do
 
     context '出品ができない時' do
       it '商品画像を1枚つけることが必須であること' do
-        @item.image.key = nil
+        @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include { "Image can't be blank" }
       end
@@ -85,6 +85,18 @@ RSpec.describe Item, type: :model do
 
       it '販売価格は半角数字のみ保存可能であること' do
         @item.price = '１１１１１'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price Half-width number')
+      end
+
+      it '価格が英数混合では登録できないこと' do
+        @item.price = 'test00'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price Half-width number')
+      end
+      
+      it '価格が半角英語のみでは登録できないこと' do
+        @item.price = 'test'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Half-width number')
       end
