@@ -21,17 +21,17 @@ has_many :customer_infos
 
 ## items table
 
-| Column              | Types      | Options           |
-| ------------------- | ---------- | ----------------- |
-| title               | string     | null : false      |
-| category_id         | integer    | null : false      |
-| detail              | text       | null : false      |
-| condition_id        | integer    | null : false      |
+| Column             | Types      | Options           |
+| ------------------ | ---------- | ----------------- |
+| title              | string     | null : false      |
+| category_id        | integer    | null : false      |
+| detail             | text       | null : false      |
+| condition_id       | integer    | null : false      |
 | shipping_charge_id | integer    | null : false      |
-| ship_from_id        | integer    | null : false      |
-| guideline_id        | integer    | null : false      |
-| price               | integer    | null : false      |
-| user                | references | foreign_key: true |
+| ship_from_id       | integer    | null : false      |
+| guideline_id       | integer    | null : false      |
+| price              | integer    | null : false      |
+| user               | references | foreign_key: true |
 
 ### Association
 
