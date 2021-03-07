@@ -18,7 +18,7 @@ RSpec.describe Item, type: :model do
 
     context '出品ができない時' do
       it '商品画像を1枚つけることが必須であること' do
-        @item.image.key = ''
+        @item.image.key = nil
         @item.valid?
         expect(@item.errors.full_messages).to include { "Image can't be blank" }
       end
