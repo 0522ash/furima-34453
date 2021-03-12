@@ -78,7 +78,7 @@ belongs_to :user
 | address       | string     | null :false       |
 | building_name | string     |                   |
 | phone_number  | string     | null :false       |
-| customerinfo | references | foreign_key: true |
+| customerinfo  | references | foreign_key: true |
 
 ### Association
 
