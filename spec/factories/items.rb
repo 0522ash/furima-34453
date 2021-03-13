@@ -9,5 +9,9 @@ FactoryBot.define do
     ship_from_id          { 2 }
     guideline_id          { 2 }
     price                 { 5000 }
+
+    after(:build) do |customerinfo_shippinginfo|
+      customerinfo_shippinginfo.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+    end
   end
 end
