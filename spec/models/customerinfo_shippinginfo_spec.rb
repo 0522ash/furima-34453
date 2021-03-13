@@ -73,39 +73,12 @@ RSpec.describe CustomerinfoShippinginfo, type: :model do
           @customerinfo_shippinginfo.valid?
           expect(@customerinfo_shippinginfo.errors.full_messages).to include ("Phone number Input only number")
         end
-      
-      
-      # 購入が完了したら、トップページまたは購入完了ページに遷移すること
-      
-      
-      # エラーハンドリングができていること（入力に問題がある状態で「購入」ボタンが押された場合、情報は受け入れられず、購入ページでエラーメッセージが表示されること）
-      
-      
-      # エラーハンドリングの際、1つエラーに対して同じエラーメッセージが重複して表示されないこと
-      
-      
-      # 売却済みの商品は、画像上に『sold out』の文字が表示されるようになっていること（商品一覧機能）
-      
-      
-      # 売却済みの商品は、画像上に『sold out』の文字が表示されるようになっていること（商品詳細機能）
-      
-      
-      # ログイン状態の出品者でも、売却済みの商品に対しては「編集・削除ボタン」が表示されないこと（商品詳細機能）
-      
-      
-      # ログイン状態の出品者以外のユーザーでも、売却済みの商品に対しては「購入画面に進む」ボタンが表示されないこと（商品詳細機能）
-      
-      
-      # ログイン状態の出品者であっても、URLを直接入力して自身の売却済み商品の商品情報編集ページへ遷移しようとすると、トップページに遷移すること（商品情報編集機能）
 
-
-      # クレジットカード決済ができること
-      
-      
-      # クレジットカードの情報は購入の都度入力させること
-      
-      
-      # クレジットカード情報は必須であり、正しいクレジットカードの情報で無いときは決済できないこと
+        it 'tokenが空では登録できないこと' do
+          @customerinfo_shippinginfo.token = nil
+          @customerinfo_shippinginfo.valid?
+          expect(@customerinfo_shippinginfo.errors.full_messages).to include("Token can't be blank")
+        end
       end
     end
   end

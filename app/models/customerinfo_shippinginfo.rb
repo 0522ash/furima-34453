@@ -1,6 +1,6 @@
 class CustomerinfoShippinginfo
   include ActiveModel::Model
-  attr_accessor :item_id, :user_id, :postal_code, :ship_from_id, :city, :address, :building_name, :phone_number
+  attr_accessor :item_id, :user_id, :postal_code, :ship_from_id, :city, :address, :building_name, :phone_number, :token
 
   with_options presence: true do
     validates :user_id
@@ -9,6 +9,7 @@ class CustomerinfoShippinginfo
     validates :city, format: { with: /\A[ぁ-んァ-ン一-龥]/}
     validates :address
     validates :phone_number, format: {with: /\A[0-9]{11}+\z/, message: "Input only number"}
+    validates :token
   end
 
 

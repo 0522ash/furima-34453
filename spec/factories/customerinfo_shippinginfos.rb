@@ -6,9 +6,7 @@ FactoryBot.define do
     building_name          { '東京ハイツ' }
     phone_number           { '09012345678' }
     ship_from_id           { 2 }
-    # item_id                { 5 }
-    # association :user
-    # association :item
+    token                  {"tok_abcdefghijk00000000000000000"}
 
   end
 end
