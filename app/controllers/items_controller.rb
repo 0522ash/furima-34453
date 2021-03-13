@@ -24,9 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.customerinfo.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.customerinfo.present?
   end
 
   def update
@@ -43,8 +41,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
   def item_params
-    params.require(:item).permit(:title, :detail, :category_id, :condition_id, :shipping_charge_id, :ship_from_id,:guideline_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:title, :detail, :category_id, :condition_id, :shipping_charge_id, :ship_from_id, :guideline_id,
+                                 :price, :image).merge(user_id: current_user.id)
   end
 
   def set_item
