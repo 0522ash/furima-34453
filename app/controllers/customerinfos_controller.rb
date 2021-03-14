@@ -1,5 +1,7 @@
 class CustomerinfosController < ApplicationController
   before_action :authenticate_user!, expect: :index
+  before_action :move_to_index, only: :create
+  before_action :set_customerinfo
 
   def index
     @item = Item.find(params[:item_id])
@@ -34,5 +36,9 @@ class CustomerinfosController < ApplicationController
       card: customerinfo_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_customerinfo
+    redirect_to root_path if @item.blank?
   end
 end

@@ -13,16 +13,27 @@ RSpec.describe CustomerinfoShippinginfo, type: :model do
         expect(@customerinfo_shippinginfo).to be_valid
       end
 
+      it '建物名が無くても登録できること' do
+        @customerinfo_shippinginfo.building_name = ''
+        @customerinfo_shippinginfo.valid?
+        expect(@customerinfo_shippinginfo).to be_valid
+      end
+
       context '保存できない時' do
         it '配送先の情報として、郵便番号が必須であること' do
           @customerinfo_shippinginfo.postal_code = ''
           @customerinfo_shippinginfo.valid?
-          expect(@customerinfo_shippinginfo.errors.full_messages).to include "Postal code can't be blank",
-                                                                             'Postal code Input correctly'
+          expect(@customerinfo_shippinginfo.errors.full_messages).to include "Postal code can't be blank", 'Postal code Input correctly'
         end
 
         it '配送先の情報として、都道府県が必須であること' do
           @customerinfo_shippinginfo.ship_from_id = ''
+          @customerinfo_shippinginfo.valid?
+          expect(@customerinfo_shippinginfo.errors.full_messages).to include('Ship from Select')
+        end
+
+        it '都道府県のidが1の場合は登録できないこと' do
+          @customerinfo_shippinginfo.ship_from_id = 1
           @customerinfo_shippinginfo.valid?
           expect(@customerinfo_shippinginfo.errors.full_messages).to include('Ship from Select')
         end
@@ -42,8 +53,7 @@ RSpec.describe CustomerinfoShippinginfo, type: :model do
         it '配送先の情報として、電話番号が必須であること' do
           @customerinfo_shippinginfo.phone_number = ''
           @customerinfo_shippinginfo.valid?
-          expect(@customerinfo_shippinginfo.errors.full_messages).to include "Phone number can't be blank",
-                                                                             'Phone number Input only number'
+          expect(@customerinfo_shippinginfo.errors.full_messages).to include "Phone number can't be blank"
         end
 
         it '郵便番号の保存にはハイフンが必要であること（123-4567となる）' do
@@ -80,6 +90,18 @@ RSpec.describe CustomerinfoShippinginfo, type: :model do
           @customerinfo_shippinginfo.token = nil
           @customerinfo_shippinginfo.valid?
           expect(@customerinfo_shippinginfo.errors.full_messages).to include("Token can't be blank")
+        end
+
+        it 'user_idが無いと登録できないこと' do
+          @customerinfo_shippinginfo.user_id = nil
+          @customerinfo_shippinginfo.valid?
+          expect(@customerinfo_shippinginfo.errors.full_messages).to include ("User can't be blank")
+        end
+
+        it 'item_idが無いと登録できないこと' do
+          @customerinfo_shippinginfo.item_id = nil
+          @customerinfo_shippinginfo.valid?
+          expect(@customerinfo_shippinginfo.errors.full_messages).to include ("Item can't be blank")
         end
       end
     end
