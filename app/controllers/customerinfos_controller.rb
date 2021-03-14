@@ -1,16 +1,15 @@
 class CustomerinfosController < ApplicationController
   before_action :authenticate_user!, expect: :index
   before_action :move_to_index, only: :create
+  before_action :assignment, only: [:index, :create]
   before_action :set_customerinfo
 
   def index
-    @item = Item.find(params[:item_id])
     redirect_to root_path if current_user.id == @item.user_id
     @customerinfo_shippinginfo = CustomerinfoShippinginfo.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @customerinfo_shippinginfo = CustomerinfoShippinginfo.new(customerinfo_params)
     if @customerinfo_shippinginfo.valid?
       pay_item
@@ -37,8 +36,13 @@ class CustomerinfosController < ApplicationController
       currency: 'jpy'
     )
   end
-
-  def set_customerinfo
-    redirect_to root_path if @item.blank?
+  
+  def assignment
+    @item = Item.find(params[:item_id])
   end
+  
+  def set_customerinfo
+    redirect_to root_path if @item.customerinfo.present?
+  end
+
 end
