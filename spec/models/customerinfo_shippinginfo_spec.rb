@@ -25,7 +25,7 @@ RSpec.describe CustomerinfoShippinginfo, type: :model do
       it '配送先の情報として、郵便番号が必須であること' do
         @customerinfo_shippinginfo.postal_code = ''
         @customerinfo_shippinginfo.valid?
-        expect(@customerinfo_shippinginfo.errors.full_messages).to include "Postal code can't be blank", 'Postal code Input correctly'
+        expect(@customerinfo_shippinginfo.errors.full_messages).to include ("Postal code can't be blank")
       end
 
       it '配送先の情報として、都道府県が必須であること' do
