@@ -17,7 +17,7 @@
 
 has_many :items
 has_many :comments
-has_many :customer_infos
+has_many :customerinfos
 
 ## items table
 
@@ -37,7 +37,7 @@ has_many :customer_infos
 
 belongs_to :user
 has_many :comments
-has_one :customer_info
+has_one :customerinfo
 
 ## comments table
 
@@ -53,7 +53,7 @@ belongs_to :user
 belongs_to :item
 
 
-## customer_info table
+## customerinfo table
 
 | Column | Types      | Options           |
 | ------ | ---------- | ----------------- |
@@ -63,12 +63,12 @@ belongs_to :item
 
 ### Association
 
-has_one :shipping_info
+has_one :shippinginfo
 belongs_to :item
 belongs_to :user
 
 
-## shipping_info table
+## shippinginfo table
 
 | Column        | Types      | Options           |
 | ------------- | ---------- | ----------------- |
@@ -78,8 +78,8 @@ belongs_to :user
 | address       | string     | null :false       |
 | building_name | string     |                   |
 | phone_number  | string     | null :false       |
-| customer_info | references | foreign_key: true |
+| customerinfo  | references | foreign_key: true |
 
 ### Association
 
-belongs_to :customer_info
+belongs_to :customerinfo
