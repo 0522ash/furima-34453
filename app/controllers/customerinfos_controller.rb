@@ -1,15 +1,17 @@
 class CustomerinfosController < ApplicationController
   before_action :authenticate_user!, expect: :index
-  before_action :move_to_index, only: :create
-  before_action :same_user, only: [:index, :create]
+  # before_action :move_to_index, only: :create
   before_action :assignment, only: [:index, :create]
+  before_action :same_user, only: [:index, :create]
   before_action :set_customerinfo
 
   def index
+    # redirect_to root_path if current_user.id == @item.user_id
     @customerinfo_shippinginfo = CustomerinfoShippinginfo.new
   end
 
   def create
+    # redirect_to root_path if current_user.id == @item.user_id
     @customerinfo_shippinginfo = CustomerinfoShippinginfo.new(customerinfo_params)
     if @customerinfo_shippinginfo.valid?
       pay_item
@@ -37,12 +39,12 @@ class CustomerinfosController < ApplicationController
     )
   end
   
-  def same_user
-    redirect_to root_path if current_user.id == @item.user_id
-  end
-  
   def assignment
     @item = Item.find(params[:item_id])
+  end
+  
+  def same_user
+    redirect_to root_path if current_user.id == @item.user_id
   end
   
   def set_customerinfo
